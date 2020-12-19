@@ -6,7 +6,7 @@ import Doc from "./src/Doc";
 
 function App() {
   return (
-    <Router>
+    <Router >
       <Switch>
         <Route path="/doc">
           <Doc />

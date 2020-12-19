@@ -8,8 +8,9 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -64,15 +65,15 @@ export default function Checkout() {
           <Typography variant="h6" color="inherit" noWrap>
             How it works?
           </Typography>
+          <Link to="/" style={{textDecoration: "none",  marginLeft:"80%"}}>
           <Button
             variant="outlined"
             size="large"
             color="primary"
-            className={classes.button}
-            href="/"
           >
             Dashboard
           </Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <main className={classes.layout}>
@@ -106,7 +107,7 @@ export default function Checkout() {
           <br />
           <Typography align="justified">
             The integration of large numbers of tiny MOS transistors into a
-            large chip results in circuits that are orders of magnitude largeer,
+            large chip results in circuits that are orders of magnitude larger,
             faster, and less expensive than those constructed of discrete
             electronic components.
             <br />

@@ -14,7 +14,7 @@ import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+// import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -30,20 +30,22 @@ import PropTypes from "prop-types";
 import Overall from "./Overall";
 import Button from "@material-ui/core/Button";
 import RefreshIcon from '@material-ui/icons/Refresh';
+import { Link } from "react-router-dom";
 
 function Copyright() {
   const classes = useStyles();
   return (
     <div align="center">
+      <Link to='/doc' style={{textDecoration: "none"}}>
       <Button
         variant="outlined"
         size="large"
         color="primary"
         className={classes.margin}
-        href="/docs"
       >
         How it works?
       </Button>
+      </Link>
       <Typography variant="body2" color="textSecondary" align="center">
         {"Copyright © "}
         <Link color="inherit" href="https://material-ui.com/">
