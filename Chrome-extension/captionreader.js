@@ -1,7 +1,11 @@
 console.log("reader loaded");
 try {
-  // CNusmb
+  // CNusmb class for caption container
   let lwrSpeech = "";
+
+  let alertStatus = false;
+
+  // Observes subtitle container
   const subtitleObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
       const newNodes = mutation.addedNodes;
@@ -16,8 +20,17 @@ try {
     });
   });
 
+  // calls the observer after every 5s
   const refresh = setInterval(() => {
     const subtitleDiv = document.querySelector("div[jscontroller='D1tHje']");
+    if (
+      alertStatus == false &&
+      subtitleDiv != null &&
+      subtitleDiv.style.display === "none"
+    ) {
+      alert("Turn your captions on for working of IVC");
+      alertStatus = true;
+    }
     subtitleObserver.observe(subtitleDiv, {
       childList: true,
       subtree: true,
@@ -25,10 +38,12 @@ try {
       characterData: false,
     });
   }, 5000);
+
+  // Sends the caption text after every 60s
   const sendRequest = setInterval(() => {
-      const text=lwrSpeech;
-      lwrSpeech="";
-    fetch("https://eaogudskckezrfywev.pythonanywhere.com/submit", {
+    const text = lwrSpeech;
+    lwrSpeech = "";
+    fetch("https://34d40d918c50.ngrok.io/submit", {
       method: "post",
       body: JSON.stringify(text),
     })
@@ -36,9 +51,9 @@ try {
         return response.json();
       })
       .then(function (data) {
-        console.log(data)
+        console.log(data);
       });
-  },30000);
+  }, 60000);
 } catch (e) {
   console.log("error in transcripting", e);
 }
