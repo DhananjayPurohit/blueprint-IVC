@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ivc-client</string>
+    <string name="lets_wait_for_a_question">Lets wait for a question</string>
+    <string name="true1">True</string>
+    <string name="false1">False</string>
+    <string name="submit">Submit</string>
+</resources>
