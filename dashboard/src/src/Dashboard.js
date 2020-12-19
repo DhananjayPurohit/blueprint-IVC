@@ -28,23 +28,30 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
 import Overall from "./Overall";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 function Copyright() {
   const classes = useStyles();
   return (
-    <div>
-      <Button variant="outlined" size="large" color="primary" className={classes.margin}>
-          How it works?
-        </Button>
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        IVC
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <div align="center">
+      <Button
+        variant="outlined"
+        size="large"
+        color="primary"
+        className={classes.margin}
+        href="/docs"
+      >
+        How it works?
+      </Button>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="https://material-ui.com/">
+          IVC
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
     </div>
   );
 }

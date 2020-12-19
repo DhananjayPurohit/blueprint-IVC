@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import DoneIcon from '@material-ui/icons/Done';
 import ClearIcon from '@material-ui/icons/Clear';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import IconButton from "@material-ui/core/IconButton";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -17,6 +19,9 @@ function preventDefault(event) {
 const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
+  },
+  refresh: {
+    marginLeft: "90%",
   },
 }));
 
@@ -27,9 +32,19 @@ export default function Scores() {
   .then(response => response.json())
   .then(data => setData(data.items));
 
+  const Refresh = () => {
+    console.log("press");
+    fetch('https://eaogudskckezrfywev.pythonanywhere.com/leader')
+    .then(response => response.json())
+    .then(data => setData(data.items));
+  }
+
   return (
     <React.Fragment>
       {/* <Title>Most recent question</Title> */}
+      <IconButton aria-label="refresh" className={classes.refresh} onClick={() => Refresh()}>
+                <RefreshIcon />
+              </IconButton>
       <Table size="small">
         <TableHead>
           <TableRow>

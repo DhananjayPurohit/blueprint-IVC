@@ -10,6 +10,8 @@ import Title from "./Title";
 import DoneIcon from "@material-ui/icons/Done";
 import ClearIcon from "@material-ui/icons/Clear";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import IconButton from "@material-ui/core/IconButton";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -21,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   seeMore: {
     marginTop: theme.spacing(3),
+  },
+  refresh: {
+    marginLeft: "90%",
   },
 }));
 
@@ -51,32 +56,39 @@ function CustomizedProgressBars(props) {
 
 export default function Overall() {
   const classes = useStyles();
-  const [data, setData] = useState([{"name":"Dhananjay Purohit","time":1.2309999999999999,"score":90},
-  {"correct":true,"name":"Vedang Joshi","time":1.345,"score":100},
-  {"correct":false,"name":"Ritik Jain","time":2.3,"score":80}]);
-//   fetch("https://eaogudskckezrfywev.pythonanywhere.com/leader")
-//     .then((response) => response.json())
-//     .then((data) => setData(data.items));
+  const [data, setData] = useState([]);
+  
+  fetch("https://eaogudskckezrfywev.pythonanywhere.com/score")
+    .then((response) => response.json())
+    .then((data) => setData(data.items));
+
+const Refresh = () => {
+    console.log("press");
+    fetch('https://eaogudskckezrfywev.pythonanywhere.com/score')
+    .then(response => response.json())
+    .then(data => setData(data.items));
+  }
 
   return (
     <React.Fragment>
       {/* <Title>Most recent question</Title> */}
+      <IconButton aria-label="refresh" className={classes.refresh} onClick={() => Refresh()}>
+                <RefreshIcon />
+              </IconButton>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
-            <TableCell>Time Taken</TableCell>
-            <TableCell align="right">Answer</TableCell>
+            <TableCell align="right">Score</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
             <TableRow key={row.name}>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{row.time.toFixed(2)}</TableCell>
               <TableCell align="right">
-                <CustomizedProgressBars val={row.score}/>
-                {`${row.score} %`}
+                <CustomizedProgressBars val={row.score*10}/>
+                {`${row.score*10} %`}
               </TableCell>
             </TableRow>
           ))}
