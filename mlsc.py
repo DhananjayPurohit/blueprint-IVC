@@ -38,8 +38,6 @@ class mls:
         self.properNoun = dict(sorted(self.properNoun.items(), key=lambda item: item[1], reverse=True))
         self.noun = dict(sorted(self.noun.items(), key=lambda item: item[1], reverse=True))
         self.adjectives = dict(sorted(self.adjectives.items(), key=lambda item: item[1], reverse=True))
-        print(self.properNoun)
-        print(self.noun)
 
     def getBlanks(self):
 
@@ -64,8 +62,7 @@ class mls:
                     r1["option3"] = "None of the above"
                     tempBlanks.append(r1)
 
-        self.blanks = tempBlanks[0:2]
-        print(self.blanks)
+        self.blanks = tempBlanks[0]
         return self.blanks
 
     def getBool(self):
@@ -87,14 +84,8 @@ class mls:
                     else:
                         self.bool.append({"bool": j.replace(i[0], i[1]), "answer": False})
 
-        return random.sample(self.bool, 2)
+        return random.choice(self.bool)
 
     def getResponse(self):
-        self.getBlanks()
-        self.getBool()
-
-        resp = []
-        for i in range(2):
-            question = {"blank": self.blanks[i], "bool": self.bool[i]}
-            resp.append(question)
+        resp = {"blank": self.getBlanks(), "bool": self.getBool()}
         return resp
