@@ -1,0 +1,15 @@
+{
+  "name": "IVC",
+  "description": "creates questions from transcripts",
+  "version": "1",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["https://meet.google.com/*"],
+    "js": ["captionreader.js"],
+    "run_at": "document_idle",
+    "all_frames": false
+  }],
+  "manifest_version": 2
+}
