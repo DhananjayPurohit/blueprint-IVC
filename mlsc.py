@@ -38,13 +38,15 @@ class mls:
         self.properNoun = dict(sorted(self.properNoun.items(), key=lambda item: item[1], reverse=True))
         self.noun = dict(sorted(self.noun.items(), key=lambda item: item[1], reverse=True))
         self.adjectives = dict(sorted(self.adjectives.items(), key=lambda item: item[1], reverse=True))
+        print(self.properNoun)
+        print(self.noun)
 
     def getBlanks(self):
 
         tempSentense = set()
         tempBlanks = []
 
-        for i in self.properNoun.keys():
+        for i in list(self.properNoun.keys()) + list(self.noun.keys()):
             for j in self.sentences:
                 if i in j and j not in tempSentense:
                     tempSentense.add(j)
@@ -52,10 +54,8 @@ class mls:
                     r1["blank"] = j.replace(i, "_____")
                     r1["answer"] = i
 
-                    tempArr = list(self.properNoun.keys())
+                    tempArr = list(self.properNoun.keys()) + list(self.noun.keys())
                     tempArr.remove(i)
-                    if len(tempArr) == 0:
-                        tempArr += list(self.noun.keys())
 
                     r1["option1"] = random.choice(tempArr)
                     tempArr.remove(r1["option1"])
@@ -87,7 +87,6 @@ class mls:
                     else:
                         self.bool.append({"bool": j.replace(i[0], i[1]), "answer": False})
 
-        print(self.bool)
         return random.sample(self.bool, 2)
 
     def getResponse(self):

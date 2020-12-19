@@ -13,8 +13,7 @@ try {
         if (node.classList && node.classList.contains("CNusmb")) {
           const speech = node.textContent;
 
-          lwrSpeech = lwrSpeech + speech.toLowerCase();
-          console.log(lwrSpeech);
+          lwrSpeech = lwrSpeech +" "+ speech.toLowerCase();
         }
       });
     });
@@ -43,7 +42,7 @@ try {
   const sendRequest = setInterval(() => {
     const text = lwrSpeech;
     lwrSpeech = "";
-    fetch("https://34d40d918c50.ngrok.io/submit", {
+    fetch("https://2d7ab7ade495.ngrok.io/submit", {
       method: "post",
       body: JSON.stringify(text),
     })
