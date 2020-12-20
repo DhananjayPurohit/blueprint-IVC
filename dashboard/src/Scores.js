@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Scores() {
   const classes = useStyles();
   const [data,setData]=useState([]);
-  fetch('https://eaogudskckezrfywev.pythonanywhere.com/leader')
+  fetch('https://d40f1ea2f720.ngrok.io/leader')
   .then(response => response.json())
   .then(data => setData(data.items));
 
   const Refresh = () => {
     console.log("press");
-    fetch('https://eaogudskckezrfywev.pythonanywhere.com/leader')
+    fetch('https://d40f1ea2f720.ngrok.io/leader')
     .then(response => response.json())
     .then(data => setData(data.items));
   }

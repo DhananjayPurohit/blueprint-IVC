@@ -1,8 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Dashboard from "./src/Dashboard";
-import Doc from "./src/Doc";
+import Dashboard from "./Dashboard";
+import Doc from "./Doc";
 
 function App() {
   return (
