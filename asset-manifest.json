@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/blueprint-IVC/static/css/main.73efbf52.chunk.css",
-    "main.js": "/blueprint-IVC/static/js/main.f039b2f8.chunk.js",
-    "main.js.map": "/blueprint-IVC/static/js/main.f039b2f8.chunk.js.map",
+    "main.js": "/blueprint-IVC/static/js/main.d724cead.chunk.js",
+    "main.js.map": "/blueprint-IVC/static/js/main.d724cead.chunk.js.map",
     "runtime-main.js": "/blueprint-IVC/static/js/runtime-main.d796b0bd.js",
     "runtime-main.js.map": "/blueprint-IVC/static/js/runtime-main.d796b0bd.js.map",
     "static/js/2.55a4c485.chunk.js": "/blueprint-IVC/static/js/2.55a4c485.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.d796b0bd.js",
     "static/js/2.55a4c485.chunk.js",
     "static/css/main.73efbf52.chunk.css",
-    "static/js/main.f039b2f8.chunk.js"
+    "static/js/main.d724cead.chunk.js"
   ]
 }
