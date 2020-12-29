@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Scores() {
   const classes = useStyles();
   const [data,setData]=useState([]);
-  fetch('https://d40f1ea2f720.ngrok.io/leader')
+  fetch('https://28368363663e.ngrok.io/leader')
   .then(response => response.json())
   .then(data => setData(data.items));
 
   const Refresh = () => {
     console.log("press");
-    fetch('https://d40f1ea2f720.ngrok.io/leader')
+    fetch('https://28368363663e.ngrok.io/leader')
     .then(response => response.json())
     .then(data => setData(data.items));
   }
@@ -57,7 +57,7 @@ export default function Scores() {
           {data.map((row) => (
             <TableRow key={row.name}>
               <TableCell>{row.name}</TableCell>
-              <TableCell>{(row.time).toFixed(2)}</TableCell>
+              <TableCell>{row.time}</TableCell>
               <TableCell align="right">{row.correct?<DoneIcon style={{color:"green"}}/>:<ClearIcon style={{color:"red"}}/>}</TableCell>
             </TableRow>
           ))}

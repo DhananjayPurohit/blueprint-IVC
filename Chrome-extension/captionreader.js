@@ -11,20 +11,23 @@ try {
   // Observes subtitle container
   const subtitleObserver = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      const newNodes = mutation.addedNodes;
-      speech = newNodes[0].textContent;
+      const newNodes = mutation.removedNodes;
+      newNodes.forEach((node) => {
+        speech=node.textContent+speech;
+      })
     });
-    lwrSpeech=lwrSpeech+" "+speech;
+    lwrSpeech=lwrSpeech+speech;
+    speech="";
     console.log(lwrSpeech);
   });
 
-  const setObserver = (subtitleDiv) => {
+  const setObserver = (subtitleSpan) => {
     if (!observerStatus){
-      subtitleObserver.observe(subtitleDiv, {
+      subtitleObserver.observe(subtitleSpan, {
         childList: true,
-        subtree: true,
-        attributes: false,
-        characterData: false,
+        // subtree: true,
+        // attributes: false,
+        // characterData: false,
       });
     }
   }
@@ -41,25 +44,26 @@ try {
     }
     if (subtitleDiv != null &&
       subtitleDiv.style.display !== "none"){
-        setObserver(subtitleDiv);
+        const subtitleSpan = document.querySelector("div[jsname='tgaKEf']");
+        setObserver(subtitleSpan);
       }
   }, 5000);
 
   // Sends the caption text after every 60s
   const sendRequest = setInterval(() => {
     const text = lwrSpeech;
-    console.log("Chal ja"+text)
+    console.log(text)
     lwrSpeech = "";
-    // fetch("https://2d7ab7ade495.ngrok.io/submit", {
-    //   method: "post",
-    //   body: JSON.stringify(text),
-    // })
-    //   .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (data) {
-    //     console.log(data);
-    //   });
+    fetch("https://2d7ab7ade495.ngrok.io/submit", {
+      method: "post",
+      body: JSON.stringify(text),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+      });
   }, 60000);
 } catch (e) {
   console.log("error in transcripting", e);

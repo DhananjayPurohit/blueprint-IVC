@@ -58,13 +58,13 @@ export default function Overall() {
   const classes = useStyles();
   const [data, setData] = useState([]);
   
-  fetch("https://d40f1ea2f720.ngrok.io/score")
+  fetch("https://28368363663e.ngrok.io/score")
     .then((response) => response.json())
     .then((data) => setData(data.items));
 
 const Refresh = () => {
     console.log("press");
-    fetch('https://d40f1ea2f720.ngrok.io/score')
+    fetch('https://28368363663e.ngrok.io/score')
     .then(response => response.json())
     .then(data => setData(data.items));
   }
