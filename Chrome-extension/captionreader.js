@@ -12,7 +12,11 @@ try {
   let weTurnedCaptionsOn = false;
 
   let email = window.WIZ_global_data.oPEP7c;
+  console.log(email);
 
+  let subject = "Subject";
+
+  let class_id = '';
 
   const toggleTranscribing = () => {
     isTranscribing = !isTranscribing;
@@ -36,11 +40,16 @@ try {
     document.querySelector(`#${ID_TOGGLE_BUTTON}`).classList.add("on");
     console.log("Start");
     turnCaptionsOn();
-    const subtitleSpan = document.querySelector("div[jsname='tgaKEf']");
-    setObserver(subtitleSpan);
+    mountObserver();
     CallSendRequest();
   };
 
+  const mountObserver = () => {
+    const refresh = setInterval(() => {
+      const subtitleSpan = document.querySelector("div[jsname='tgaKEf']");
+      setObserver(subtitleSpan);
+    }, 5000);
+  }
   // Turn captions button on
   const turnCaptionsOn = () => {
     const captionsButtonOn = xpath(
@@ -99,6 +108,22 @@ try {
     if (buttons && !buttons.__gmt_button_added) {
       buttons.__gmt_button_added = true;
 
+      buttons.prepend(buttons.children[1].cloneNode());
+
+      const dropdown = document.createElement("div");
+      dropdown.classList = buttons.children[1].classList;
+      dropdown.classList.add("__gmt-button");
+
+      dropdown.style.display = "flex";
+      // toggleButton.onclick = toggleTranscribing;
+      buttons.prepend(dropdown);
+      var textnode = document.createElement("span");
+      textnode.innerText = subject;
+      textnode.setAttribute("id","subjectcode");
+      dropdown.appendChild(textnode);
+
+      dropdown.appendChild(makeMenu());
+
       // Find the button container element and copy the divider
       buttons.prepend(buttons.children[1].cloneNode());
 
@@ -114,6 +139,7 @@ try {
       toggleButton.appendChild(
         makeSvg(SVG_ICON, 24, 24, { id: ID_TOGGLE_BUTTON })
       );
+
     }
     const captionsButtonOn = xpath(
       `//div[text()='Turn on captions']/ancestor::div[@role='button']`,
@@ -123,6 +149,30 @@ try {
       stopTranscribing();
     }
   };
+
+  const makeMenu = () => {
+    const additionalOptions = document.createElement('div');
+    additionalOptions.onclick = e => e.stopPropagation();
+
+    fetch(`https://b0d1592f0283.ngrok.io/check-teacher?email=${email}`)
+    .then(response => response.json())
+    .then(data => {data.course.forEach((el) => additionalOptions.appendChild(makeMenuOption(el)));});
+
+    return additionalOptions;
+  }
+
+  const makeMenuOption = (text) => {
+    const option = document.createElement('label');
+    option.appendChild(document.createTextNode(text));
+    option.onclick = function setSubject(){ 
+      subject = text;
+      document.getElementById("subjectcode").innerHTML = subject;
+      fetch(`https://b0d1592f0283.ngrok.io/get-class?email=${email}&course=${subject}`)
+      .then(response => response.json())
+      .then(data => {class_id=data.class});
+    };
+    return option;
+  }
 
   // Observes subtitle container
   const subtitleObserver = new MutationObserver((mutations) => {
@@ -158,10 +208,15 @@ try {
       const text = lwrSpeech;
       console.log(text);
       lwrSpeech = "";
+      console.log(class_id);
       if (text!=""){
       fetch("https://2d7ab7ade495.ngrok.io/submit", {
         method: "post",
-        body: JSON.stringify({text:text,email:email}),
+        body: JSON.stringify({
+          text: text,
+          email: email,
+          subject: subject
+        }),
       })
         .then(function (response) {
           return response.json();
@@ -219,7 +274,7 @@ try {
       position: absolute;
       top: 40px;
       left: 0;
-      width: 300px;
+      width: 100px;
       padding: 12px;
       padding-bottom: 10px;
       padding-top: 18px;
@@ -233,7 +288,7 @@ try {
     }
     .__gmt-button > div label {
       display: block;
-      line-height: 24px;
+      line-height: 30px;
       cursor: pointer;
       margin-right: 8px;
       margin-left: 8px;
@@ -260,8 +315,13 @@ try {
       margin-top: 12px;
       margin-bottom: 12px;
     }
-    .__gmt-button > div > ul > li > svg.copy {
-      cursor: pointer;
+    .__gmt-button > div > ul > li > p {
+      padding-top:  0px;
+      padding-bottom:  0px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-size:  .8em;
+      color: #9e9e9e;
     }
     .__gmt-button > div > ul > li > span {
       margin-left: 6px;
