@@ -102,7 +102,7 @@ try {
       // Find the button container element and copy the divider
       buttons.prepend(buttons.children[1].cloneNode());
 
-      // Add our button to to enable/disable the grid
+      // Add our button to enable/disable the grid
       const toggleButton = document.createElement("div");
       toggleButton.classList = buttons.children[1].classList;
       toggleButton.classList.add("__gmt-button");
