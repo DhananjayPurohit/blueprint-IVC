@@ -1,6 +1,10 @@
+
 console.log("reader loaded");
+
+
 try {
   // CNusmb class for caption container
+
   let lwrSpeech = "";
 
   let speech = "";
@@ -17,7 +21,7 @@ try {
   let subject = "Subject";
 
   let class_id = '';
-
+  
   const toggleTranscribing = () => {
     isTranscribing = !isTranscribing;
     isTranscribing ? startTranscribing() : stopTranscribing();
