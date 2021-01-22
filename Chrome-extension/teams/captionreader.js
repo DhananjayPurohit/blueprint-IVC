@@ -74,12 +74,13 @@ try {
     recognition.start();
     document.getElementById("toggle-icon").innerHTML=`<path d="${pathD}" class="icons-default-fill" />`;
     CallSendRequest();
+    console.log("Start");
   };
 
   const stopTranscribing = () => {
     recognition.stop();
     document.getElementById("toggle-icon").innerHTML=`<path d="${pathD}" class="icons-default-fill" /><line stroke="#fff" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_40" y2="600" x2="-100" y1="-100" x1="600" fill-opacity="null" stroke-opacity="null" stroke-width="20" fill="none"/>`;
-    console.log(document.getElementById("toggle-icon"));
+    clearInterval(sendRequest);
     console.log("Stop");
   };
 
