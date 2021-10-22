@@ -8,7 +8,7 @@ The problem with an online meeting/class is not being able to deliver a fulfilli
 ### Proposed solution
 The solution we propose is simple and here are the steps to realize it.
 1. We collect the transcript of the meeting and send it to our API in realtime.
-2. The API will read the text and create `fill in the blanks` and `true/false` questions based on the text.
+2. The API will read the text and create questions based on the text.
 3. The questions are sent to participants of the meeting via a mobile app.
 4. The participants can answer the question.
 5. All participants and hosts can view the results of the test in realtime ( while the meeting is in progress ) on a leaderboard.
